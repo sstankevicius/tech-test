@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Component;
-use App\Models\Inspection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

@@ -20,19 +20,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a single farm
         $farm = Farm::factory()->create();
 
-        // Create the component types
         $componentTypeNames = ['Blade', 'Rotor', 'Hub', 'Generator'];
         foreach ($componentTypeNames as $typeName) {
             ComponentType::create(['name' => $typeName]);
         }
 
-        // Create 10 turbines for the farm
         $turbines = Turbine::factory(10)->create(['farm_id' => $farm->id]);
 
-        // Create 4 components for each turbine, one of each type
         foreach ($turbines as $turbine) {
             foreach ($componentTypeNames as $typeName) {
                 $componentType = ComponentType::where('name', $typeName)->first();
@@ -42,10 +38,8 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
 
-            // Create an inspection for the turbine
             $inspection = Inspection::factory()->create(['turbine_id' => $turbine->id]);
 
-            // Create grades for each component of the turbine
             $components = Component::where('turbine_id', $turbine->id)->get();
             foreach ($components as $component) {
                 $gradeValue = rand(1, 5);

@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 
 class FarmController extends Controller
 {
-
     /**
      * @return JsonResponse
      */
@@ -32,5 +31,4 @@ class FarmController extends Controller
             return response()->json(['error' => 'Farm not found'], 404);
         }
     }
-
 }

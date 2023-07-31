@@ -32,19 +32,4 @@ class ComponentController extends Controller
             return response()->json(['error' => 'Turbine not found'], 404);
         }
     }
-
-    /**
-     * @param $componentID
-     * @return JsonResponse
-     * @throws ModelNotFoundException
-     */
-    public function show($componentID): JsonResponse
-    {
-        try {
-            $component = Component::findOrFail($componentID);
-            return response()->json(['data' => $component]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Component not found'], 404);
-        }
-    }
 }

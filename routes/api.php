@@ -23,7 +23,11 @@ Route::prefix('turbines')->group(function () {
 });
 
 Route::get('/components', [ComponentController::class, 'index']);
-Route::get('/component-types', [ComponentTypeController::class, 'index']);
+
+Route::prefix('component-types')->group(function () {
+    Route::get('/', [ComponentTypeController::class, 'index']);
+    Route::get('/{componentTypeID}', [ComponentTypeController::class, 'show']);
+});
 
 Route::prefix('inspections')->group(function () {
     Route::get('/', [InspectionController::class, 'index']);
@@ -31,5 +35,12 @@ Route::prefix('inspections')->group(function () {
     Route::get('/{inspectionID}/grades', [GradeController::class, 'getGradesByInspection']);
 });
 
-Route::get('/grades', [GradeController::class, 'index']);
-Route::get('/grade-types', [GradeTypeController::class, 'index']);
+Route::prefix('grades')->group(function () {
+    Route::get('/', [GradeController::class, 'index']);
+    Route::get('/{gradeID}', [GradeController::class, 'show']);
+});
+
+Route::prefix('grade-types')->group(function () {
+    Route::get('/', [GradeTypeController::class, 'index']);
+    Route::get('/{gradeTypeID}', [GradeTypeController::class, 'show']);
+});
